@@ -1,1 +1,2 @@
 Starting working on Azure Function App.
+Input: Http Trigger. Output: Two Blobs.
