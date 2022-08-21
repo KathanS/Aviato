@@ -1,4 +1,7 @@
 Database - Name, Address, Mobile, email.
 1 Azure Function App for Info Collection -> next ->  1 Azure Function App for Razor Pay.
 
-Function App 
+Function App Info. Collection
+
+I/P: Name, Address, Mobile, email.
+O/P: 
