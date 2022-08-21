@@ -1,4 +1,4 @@
-Database - Cust_ID, Name, Address, Mobile, email, Image_Link/Name, Status.
+Database - Order_ID, Name, Address, Mobile, email, Image_Link/Name, Status.
 1 Azure Function App for Info Collection -> next ->  1 Azure Function App for Razor Pay.
 
 Function App Info. Collection
@@ -8,5 +8,5 @@ O/P: -
 
 Function App Razor Pay
 
-I/P: Cust_ID
-O/P: Success or Not?
+I/P: Order_ID
+O/P: Success or Not? / Return Order_ID.
