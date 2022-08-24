@@ -10,3 +10,5 @@ Function App Razor Pay
 
 I/P: Order_ID
 O/P: Success or Not? / Return Order_ID.
+
+Add this in HTML: "https://checkout.razorpay.com/v1/checkout.js"
