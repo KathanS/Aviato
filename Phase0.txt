@@ -1,1 +1,0 @@
-Starting working on Azure Function App.
