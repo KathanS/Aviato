@@ -55,7 +55,7 @@ def __img(url):
     r = requests.get(url)
     im = Image.open(BytesIO(r.content))
     im = im.crop((65, 165, 950, 1510))
-    im.save("out.png")
+    im.save("\static\out.png")
 
 def generate_picture(prompt: str, style: int = 5):
     img_uri = __getImgUrl(__sign_up(WOMBO_KEY), prompt, style)
