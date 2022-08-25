@@ -1,5 +1,3 @@
 flask
 requests
 pillow
-json
-io
