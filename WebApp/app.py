@@ -1,5 +1,9 @@
 from flask import Flask, render_template, url_for, request
 import GeneratePicture
+import requests
+from PIL import Image
+import json
+from io import StringIO, BytesIO
 
 app = Flask(__name__)
 
