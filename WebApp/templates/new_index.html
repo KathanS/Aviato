@@ -1,0 +1,36 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lobster"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+ <title>Aviato</title>
+  </head>
+  <body>
+    <div>
+      <h1>Aviato</h1>
+    </div>
+    <form class="search-form" action="/result" method="POST">
+        <input type="text" name="name" placeholder="Search..." value="">
+        
+        <input type="radio" id="Meme" name="theme" value="1">
+          <label for="Meme">Meme</label>
+
+          <input type="radio" id="Realistic" name="theme" value="2">
+          <label for="css">Realistic</label>
+
+          <input type="radio" id="javascript" name="theme" value="JavaScript">
+          <label for="javascript">JavaScript</label><br>
+        <button type="submit">Search</button>
+    </form>
+  </body>
+</html>

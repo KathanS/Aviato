@@ -1,42 +1,33 @@
 <html> 
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
 		<link rel="stylesheet" type="text/css" href="../static/index.css"> 
-
-
-
-
-	</head>
+</head>
 	
 	<body>
 
         <form class="grid" action="/result" method="POST">
 
-          {% if name %}
-            <center>
-              <h3 style="color: blue;" class="let_space">Hello {{name}}, How was your day!!</h3>
-            </center> 
-
-          {% endif %}
-           
           <label for="name">Enter you name:</label>
-          <input type="text" id="name" name="name">
+          <input type="text" id="name" name="name"><br>
+          
+          <input type="radio" id="Meme" name="theme" value="1">
+          <label for="Meme">Meme</label><br>
 
+          <input type="radio" id="Realistic" name="theme" value="2">
+          <label for="css">Realistic</label><br>
+
+          <input type="radio" id="javascript" name="theme" value="JavaScript">
+          <label for="javascript">JavaScript</label><br>
+          
           <center><input class="file_submit" type="Submit"></center>
 
         </form>
-
-        
-
-        
-
-        
         <br>
         <br>
         <br>
 
-
+        <img src="{{ url_for('static', filename='images/out.png') }}"/>
     </body>
 
 </html>
