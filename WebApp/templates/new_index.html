@@ -19,18 +19,22 @@
     <div>
       <h1>Aviato</h1>
     </div>
-    <form class="search-form" action="/result" method="POST">
+    <form action="/result" method="POST">
+      <div class="search-form">
         <input type="text" name="name" placeholder="Search..." value="">
-        
+        <button type="submit">Create</button>
+      </div>
+      <div class="search-form">
         <input type="radio" id="Meme" name="theme" value="1">
-          <label for="Meme">Meme</label>
-
-          <input type="radio" id="Realistic" name="theme" value="2">
-          <label for="css">Realistic</label>
-
-          <input type="radio" id="javascript" name="theme" value="JavaScript">
-          <label for="javascript">JavaScript</label><br>
-        <button type="submit">Search</button>
+        <label for="Meme">Meme1</label>
+        <input type="radio" id="Meme" name="theme" value="1">
+        <label for="Meme">Meme2</label>
+        <input type="radio" id="Meme" name="theme" value="1">
+        <label for="Meme">Meme3</label>
+        <input type="radio" id="Meme" name="theme" value="1">
+        <label for="Meme">Meme4</label>
+      </div>
     </form>
+    <img src="{{ url_for('static', filename='images/out.png') }}" height="70%"/>
   </body>
 </html>

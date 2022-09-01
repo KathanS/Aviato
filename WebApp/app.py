@@ -11,8 +11,9 @@ def home():
 @app.route('/result',methods=['POST', 'GET'])
 def result():
     output = request.form.to_dict()
+    print(output)
     name = output["name"]
     theme = int(output["theme"])
     print(name, theme)
     GeneratePicture.generate_picture(name, theme)
-    return render_template('index.html')
+    return render_template('new_index.html')

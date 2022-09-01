@@ -75,7 +75,7 @@ a {
 
 .search-form {
   max-width: 460px;
-  display: block;
+  display: flex;
   margin: 0 auto 32px;
 }
 
