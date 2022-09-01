@@ -2,6 +2,7 @@ import requests
 from PIL import Image
 import json
 from io import StringIO, BytesIO
+import base64
 
 WOMBO_KEY = "AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
 
@@ -55,8 +56,13 @@ def __img(url):
     r = requests.get(url)
     im = Image.open(BytesIO(r.content))
     im = im.crop((65, 165, 950, 1510))
-    im.save("static\images\out.png") # save to Azure Blob Storage or Web App Storage
+    data = BytesIO()
+    im.save(data, "JPEG")
+    encoded_img_data = base64.b64encode(data.getvalue())
+
+    return encoded_img_data
+
 
 def generate_picture(prompt: str, style: int = 5):
     img_uri = __getImgUrl(__sign_up(WOMBO_KEY), prompt, style)
-    __img(img_uri)
+    return __img(img_uri)
