@@ -13,6 +13,7 @@
     <meta name="theme-color" content="#000000" />
 <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  <title>Aviato</title>
   </head>
   <body>
@@ -21,7 +22,7 @@
     </div>
     <form action="/result" method="POST">
       <div class="search-form">
-        <input type="text" name="name" placeholder="Search..." value="">
+        <input type="text" name="name" placeholder="What's on your mind?" value="">
         <button type="submit">Create</button> <!-- Replace with SVG Icon -->
       </div>
       <div class="search-form">
@@ -38,5 +39,18 @@
       </div>
     </form>
     <img src="{{ url_for('static', filename='images/out.png') }}" height="70%"/>
+    <br><br><br>
+    <div link rel="stylesheet" href="styles/index.css"> 
+      <div class="footer-basic">
+        <footer>
+            <div class="social">
+            Developed by<br><br>
+            Kathan Sanghavi <i class="fa fa-github"></i>  <i class="fa fa-linkedin"></i> <br><br>
+            Nilay Shah <i class="fa fa-github"></i>  <i class="fa fa-linkedin"></i>
+            </div>
+            <p class="copyright">Aviato © 2022</p>
+        </footer>
+      </div>
+    </div>
   </body>
 </html>
