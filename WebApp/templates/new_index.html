@@ -22,7 +22,7 @@
     <form action="/result" method="POST">
       <div class="search-form">
         <input type="text" name="name" placeholder="Search..." value="">
-        <button type="submit">Create</button>
+        <button type="submit">Create</button> <!-- Replace with SVG Icon -->
       </div>
       <div class="search-form">
         <input type="radio" id="Meme" name="theme" value="1">
@@ -33,6 +33,8 @@
         <label for="Meme">Meme3</label>
         <input type="radio" id="Meme" name="theme" value="1">
         <label for="Meme">Meme4</label>
+        <!-- Fix Mapping with Wombo API -->
+        <!-- Add Favicon -->
       </div>
     </form>
     <img src="{{ url_for('static', filename='images/out.png') }}" height="70%"/>
