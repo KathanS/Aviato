@@ -1,0 +1,3 @@
+Endpoint: http://jsonblob.com/1016218611752386560
+
+Read Curl: curl -i -H "Content-Type: application/json" -H "Accept: application/json" https://jsonblob.com/api/jsonBlob/1016218611752386560

@@ -6,6 +6,27 @@ import base64
 
 WOMBO_KEY = "AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
 
+def hit():
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+
+    response = requests.get('https://jsonblob.com/api/jsonBlob/1016218611752386560', headers=headers)
+
+    curr = int(response.content.decode('ASCII'))
+
+    headers = {
+        # Already added when you pass json= but not when you pass data=
+        # 'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+
+    json_data = curr+1
+    
+    response = requests.put('https://jsonblob.com/api/jsonBlob/1016218611752386560', headers=headers, json=json_data)
+
 def __sign_up(key):
     body = {"key": key}
     r = requests.post(
@@ -41,7 +62,9 @@ def __getImgUrl(id_token: str, prompt: str, style: int):
         + str(style)
         + ',"display_freq":10}}'
     )
-    
+
+    hit()
+
     r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}", data=body)
     
     result = s.post(f"https://app.wombo.art/api/tradingcard/{id}")
