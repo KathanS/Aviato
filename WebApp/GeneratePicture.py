@@ -3,6 +3,7 @@ from PIL import Image
 import json
 from io import StringIO, BytesIO
 import base64
+import random
 
 WOMBO_KEY = "AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
 
@@ -87,5 +88,6 @@ def __img(url):
 
 
 def generate_picture(prompt: str, style: int = 5): # random group call
+    style = random.choice(STYLES[style-1])
     img_uri = __getImgUrl(__sign_up(WOMBO_KEY), prompt, style)
     return __img(img_uri)
