@@ -18,7 +18,7 @@ def home():
 @app.route('/result',methods=['POST', 'GET'])
 def result():
     output = request.form.to_dict()
-    print(output)
+    print(output) # check if key not present. generate random.
     name = output["name"]
     theme = int(output["theme"])
     print(name, theme)

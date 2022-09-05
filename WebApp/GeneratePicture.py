@@ -86,6 +86,6 @@ def __img(url):
     return encoded_img_data
 
 
-def generate_picture(prompt: str, style: int = 5):
+def generate_picture(prompt: str, style: int = 5): # random group call
     img_uri = __getImgUrl(__sign_up(WOMBO_KEY), prompt, style)
     return __img(img_uri)
