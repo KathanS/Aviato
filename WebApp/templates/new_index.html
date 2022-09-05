@@ -1,7 +1,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="https://drive.google.com/file/d/1lwa7oT5ieQNQmg7a1k6bMNsrwR2KZwAL/view?usp=sharing"/>
     <link
       href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lobster"
       rel="stylesheet"
@@ -15,15 +15,18 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  <title>Aviato</title>
+ 
   </head>
   <body>
+
     <div>
       <h1>Aviato</h1>
     </div>
     <form action="/result" method="POST">
       <div class="search-form">
         <input type="text" name="name" placeholder="What's on your mind?" value="">
-        <button type="submit">Create</button> <!-- Replace with SVG Icon -->
+        <button type="submit" class="rainbow-button">Create</button>
+         <!-- Replace with SVG Icon -->
       </div>
       <div class="search-form">
         <input type="radio" id="Meme" name="theme" value="1">
@@ -38,7 +41,10 @@
         <!-- Add Favicon -->
       </div>
     </form>
-    <img id="picture" src="data:image/jpeg;base64,{{ img_data }}" height="70%">
+=
+      <img id="picture" src="data:image/jpeg;base64,{{ img_data }}" alt="Avtar" class="image" height="70%">
+     
+    
     <br><br><br>
     <div link rel="stylesheet" href="styles/index.css"> 
       <div class="footer-basic">
