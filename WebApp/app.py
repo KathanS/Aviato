@@ -19,8 +19,12 @@ def home():
 def result():
     output = request.form.to_dict()
     print(output) # check if key not present. generate random.
-    name = output["name"]
-    theme = int(output["theme"])
+    name = "DNA Tornado"
+    theme = 1
+    if "name" in output:
+        name = output["name"]
+    if "theme" in output:
+        theme = int(output["theme"])
     print(name, theme)
     encoded_img_data = GeneratePicture.generate_picture(name, theme)
     return render_template('new_index.html', img_data=encoded_img_data.decode('utf-8'))
