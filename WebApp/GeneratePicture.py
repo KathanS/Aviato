@@ -7,6 +7,8 @@ import random
 
 WOMBO_KEY = "AIzaSyDCvp5MTJLUdtBYEKYWXJrlLzu1zuKM6Xw"
 
+STYLES = [[40,10,20,9],[48,16,6,1,28],[35,45,18,14],[2,21,11,17,34],[4,32,5,44]]
+
 def hit():
 
     headers = {
