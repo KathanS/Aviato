@@ -319,3 +319,17 @@ a {
         background-position:20vw;
       }
     }
+
+    .btn {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+    
+    .btn:hover {
+      background-color: RoyalBlue;
+    }
+  

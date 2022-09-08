@@ -1,0 +1,297 @@
+# %%% Kinamtics Simulation of land based robot
+# clc;
+# clear all;
+# close all;
+
+
+# %% Simulation Parameters
+# dt=0.1;  %% Step size
+# ts=10;   %% Simulation time
+# t=0:dt:ts;   % time span
+
+# %% Initial Conditions
+# x0=0;
+# y0=0;
+# psi0=pi/2;
+
+# eta0=[x0;y0;psi0];      %initial position of the robot
+
+# zeta0=[0;0;0];              % initial input commands
+
+
+
+# eta(:,1)=eta0;
+# zeta(:,1)=zeta0;
+
+
+# %% Robot parameters
+
+# m=10;   % mass of the vehicle
+# I=0.1 ;  % Inertia of the robot
+
+
+# xbc=0.4; ybc=0;  % center of mass of the vehicle
+
+
+# %% Loop starts Here: State propogation
+
+# for i=1:length(t)
+
+    
+#     u=zeta(1,i);  % speed in x-axis
+#     v=zeta(2,i);  %  speed in x-axis
+#     r=zeta(3,i);  %  rotational speed in z-axis
+    
+    
+#     %% Intertia matrix
+    
+#     D=[m,0,-m*ybc;
+#         0,m,m*xbc;
+#         -m*ybc,m*xbc,I+m*(xbc^2+ybc^2)];
+    
+#     %% Other vector
+    
+#     n_zeta=[-m*r*(v+xbc*r);m*r*(u-ybc*r);m*r*(u*xbc+ybc*v)];
+    
+    
+#     %% input vector
+    
+#     tau(:,i)=[1;0;0];
+    
+
+#     %% Jacobian Matrix
+    
+#     psi=eta(3,i);     % current orientation in radian
+    
+#     J_psi=[cos(psi),-sin(psi),0;    
+#         sin(psi),cos(psi),0;
+#         0,0,1];
+    
+    
+    
+#     zeta_dot(:,i)=inv(D)*(tau(:,i)- n_zeta);
+#     zeta(:,i+1)=zeta(:,i)+dt*zeta_dot(:,i);     %% Velocity update
+    
+    
+
+#     eta(:,i+1)=eta(:,i)+dt*(J_psi *(zeta(:,i)+dt*zeta_dot(:,i))); %%% State update
+    
+# end
+
+
+# % %% plotting 
+# % figure
+# % plot(t,eta(1,1:i),'r-');
+# % set(gca, 'fontsize',24);
+# % xlabel('time (sec)');
+# % ylabel('x position (mtrs)');
+# % 
+# % 
+# % figure
+# % plot(t,eta(2,1:i),'g-');
+# % set(gca, 'fontsize',24);
+# % xlabel('time (sec)');
+# % ylabel('y position (mtrs)');
+# % 
+# % 
+# % figure
+# % plot(t,eta(3,1:i),'b-');
+# % set(gca, 'fontsize',24);
+# % xlabel('time (sec)');
+# % ylabel(' \psi rotation (rad)');
+# % 
+# % 
+# % figure
+# % plot(eta(1,1:i),eta(2,1:i));
+# % xlabel('x position (mtrs)');
+# % ylabel('y position (mtrs)');
+
+
+
+
+# %% Animation for mobile robot
+# l=0.6;  % length of robot
+# w=0.4; % width of robot
+
+
+# mr_co=[-l/2,l/2,l/2,-l/2,-l/2;
+#     -w/2,-w/2,w/2,w/2,-w/2];
+
+
+# figure
+
+# for i=1:length(t)    % animation starts here
+#     psi=eta(3,i);
+#     % Jacobian Matrix
+#     R_psi=[cos(psi),-sin(psi);    
+#         sin(psi),cos(psi);]  % Rotation matrix
+    
+#     v_pos=R_psi*mr_co;
+    
+#     fill(v_pos(1,:)+eta(1,i),v_pos(2,:)+eta(2,i),'g');
+#     hold on;grid on;
+#      axis([-3 15 -3 15]); axis square
+#     plot(eta(1,1:i),eta(2,1:i));
+#     legend('Robot','Path')
+#     set(gca, 'fontsize',24);
+#     xlabel('x position (mtrs)');
+#     ylabel('y position (mtrs)');
+#     pause(0.05)
+#     hold off;
+# end    % Animation ends here
+    
+
+
+
+# Kinamtics Simulation of land based robot
+
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import time
+from matplotlib.animation import FuncAnimation
+from matplotlib.patches import Polygon
+
+# Simulation Parameters
+dt = 0.1  # Step size
+ts = 10  # Simulation time
+t = np.arange(0, ts, dt)  # time span
+
+# Initial Conditions
+x0 = 0
+y0 = 0
+psi0 = 0
+
+eta = np.empty([3, len(t)+1])
+zeta = np.empty([3, len(t)+1])
+zeta_dot = np.empty([3, len(t)])
+tau = np.empty([3, len(t)])
+eta_dot = np.empty([3, len(t)])
+
+eta0 = np.array([[x0], [y0], [psi0]])
+eta[:, 0] = eta0[:, 0]
+
+# Robot Parameters
+
+m=10;   # mass of the vehicle
+I=0.1 ;  # Inertia of the robot
+
+
+xbc=0; ybc=0;  # center of mass of the vehicle
+
+
+for i in range(len(t)-1):
+
+    u=zeta[0,i];  # speed in x-axis
+    v=zeta[1,i];  #  speed in x-axis
+    r=zeta[2,i];  #  rotational speed in z-axis
+
+    # Intertia matrix
+    
+    D = [[m,0,-m*ybc],
+        [0,m,m*xbc],
+        [-m*ybc,m*xbc,I+m*(xbc*xbc+ybc*ybc)]]
+    
+    # Other vector
+    
+    n_zeta = [-m*r*(v+xbc*r),m*r*(u-ybc*r),m*r*(u*xbc+ybc*v)]
+    
+    # input vector
+    temp=np.array([[1],[0],[0]])
+    #tau[:,i] = np.array([[1],[0],[0]])
+    tau[:,i]=temp[:,0]
+
+    psi = eta[2, i]  # current orientation in redian
+    J_psi = [[math.cos(psi), -math.sin(psi), 0],
+             [math.sin(psi), math.cos(psi), 0], [0, 0, 1]]
+    
+    TT = tau[:,i]- n_zeta
+
+    T = np.dot(np.linalg.inv(D), TT)
+
+    zeta_dot[:,i] = np.dot(np.linalg.inv(D), tau[:,i]- n_zeta)
+    
+    zeta[:,i+1] = zeta[:,i] + dt*zeta_dot[:,i];     # Velocity update
+        
+    eta[:,i+1] = eta[:,i] + np.dot(J_psi, zeta[:,i] + zeta_dot[:,i]*dt)*dt; # State update
+    
+# plotting
+
+# Figure 1
+plt.figure(1)
+plt.plot(t, eta[0, 0:len(t)], c='red', linestyle='-')
+font = {'size': 24}
+plt.rc('font', **font)
+plt.xlabel('time (sec)')
+plt.ylabel('x position (mtrs)')
+plt.interactive(True)
+plt.show()
+
+# Figure 2
+plt.figure(2)
+plt.plot(t, eta[1, 0:len(t)], c='green', linestyle='-')
+font = {'size': 24}
+plt.rc('font', **font)
+plt.xlabel('time (sec)')
+plt.ylabel('y position (mtrs)')
+plt.interactive(True)
+plt.show()
+
+# Figure 3
+plt.figure(3)
+plt.plot(t, eta[2, 0:len(t)], c='blue', linestyle='-')
+font = {'size': 24}
+plt.rc('font', **font)
+plt.xlabel('time (sec)')
+plt.ylabel(r"$\psi$" + ' rotation (rad)')
+plt.interactive(True)
+plt.show()
+
+
+# Figure 4
+plt.figure(4)
+plt.plot(eta[0, 0:len(t)], eta[1, 0:len(t)])
+plt.xlabel('x position (mtrs)')
+plt.ylabel('y position (mtrs)')
+plt.interactive(True)
+plt.show()
+
+# %% Animation for mobile robot
+l=0.6;  # length of robot
+w=0.4;  # width of robot
+
+
+mr_co=[[-l/2,l/2,l/2,-l/2,-l/2] ,[-w/2,-w/2,w/2,w/2,-w/2]];
+
+eta=np.transpose(eta)
+
+# figure
+fig, ax = plt.subplots()
+x=[]
+y=[]
+
+#animation starts here  
+def animate(i):
+    psi=eta[i][2]
+    R_psi=np.array([[math.cos(psi),-math.sin(psi)],[math.sin(psi),math.cos(psi)]])
+    
+    v_pos=R_psi.dot(mr_co);
+
+    
+    ax.clear()
+    v_pos[0]=v_pos[0]+eta[i][0];
+    v_pos[1]=v_pos[1]+eta[i][1];
+    v_pos=v_pos.T
+    ax.add_patch(Polygon(v_pos,facecolor='g',edgecolor='b',zorder=2))
+    x.append(eta[i][0])
+    y.append(eta[i][1])
+    ax.plot(x, y)    
+    ax.set_xlim(-1 ,3)
+    ax.set_ylim(-1, 3)
+    ax.set_xlabel('x position (in mtrs)')
+    ax.set_ylabel('y position (in mtrs)')
+    ax.grid()
+   
+animated_graph = FuncAnimation(fig, animate, frames=len(t), interval=1, repeat=False)  # library function
+
+plt.show(block = True)
