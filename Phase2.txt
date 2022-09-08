@@ -1,0 +1,8 @@
+Login - Database, Google Sign in Option.
+Download with Watermark.
+Core Function Upgrade - Styles on Person's Photo.
+Share Pic on Instagram.
+
+Bonus!
+Gallery Page - Selected Pics from User? Voting?
+User Data Collection - Time, Prompt, Image, Style
