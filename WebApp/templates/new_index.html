@@ -24,14 +24,15 @@
     <div>
       <h1>Aviato</h1>
     </div>
-    <form action="/result" method="POST">
+
+    <form action="{{url_for("result")}}" method="post">
       <div class="search-form">
         <input type="text" name="name" placeholder="What's on your mind?" value="">
         <button type="submit" class="rainbow-button">Create</button>
          <!-- Replace with SVG Icon -->
       </div>
       <div class="search-form">
-        <input type="radio" id="Meme" name="theme" value="1">
+        <input type="radio" id="Meme" name="theme" value="1" checked="checked">
         <label for="Meme">Dark</label>
         <input type="radio" id="Meme" name="theme" value="2">
         <label for="Meme">Vibrant</label>

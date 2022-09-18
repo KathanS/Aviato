@@ -4,7 +4,7 @@
    <head>
       <meta charset="utf-8">
       <title>Login and Registration Form in HTML</title>
-      <link rel="stylesheet" type= "text/css" href="style.css">
+      <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css')}}">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
    <body>
@@ -26,15 +26,15 @@
                <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-               <form action="#" class="login">
+               <form action="{{url_for('login')}}" method="post" class="login">
                   <div class="field">
-                     <input type="text" placeholder="Email Address" required>
+                     <input type="text" placeholder="Email Address" name="email" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" required>
+                     <input type="password" placeholder="Password" name="password"required>
                   </div>
                   <div class="pass-link">
-                     <a href="#">Forgot password?</a>
+                     <a href="javascript:forgotPassword()">Forgot password?</a>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
@@ -43,21 +43,75 @@
                   <div class="signup-link">
                      Not a member? <a href="">Signup now</a>
                   </div>
+                  <head>
+                     <meta name="google-signin-scope" content="profile email">
+                     <meta name="google-signin-client_id" content="484500096380-a9mkb3gt7uechn7v865n670qi12f88as.apps.googleusercontent.com">
+                     <script src="https://apis.google.com/js/platform.js" async defer></script>
+                   </head>
+                   <body>
+                     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                     <script>
+                       function onSignIn(googleUser) {
+                         // Useful data for your client-side scripts:
+                         var profile = googleUser.getBasicProfile();
+                         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                         console.log('Full Name: ' + profile.getName());
+                         console.log('Given Name: ' + profile.getGivenName());
+                         console.log('Family Name: ' + profile.getFamilyName());
+                         console.log("Image URL: " + profile.getImageUrl());
+                         console.log("Email: " + profile.getEmail());
+                 
+                         // The ID token you need to pass to your backend:
+                         var id_token = googleUser.getAuthResponse().id_token;
+                         console.log("ID Token: " + id_token);
+                       }
+                       </script>
                </form>
-               <form action="#" class="signup">
+               <form action="{{url_for('register')}}" method="post" class="signup">
+                  <span id="error"></span>
                   <div class="field">
-                     <input type="text" placeholder="Email Address" required>
+                     <input type="text" placeholder="Name" name="name" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" required>
+
+                     <input type="text" placeholder="Email Address" name="email" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Confirm password" required>
+                     <input type="password" placeholder="Password" name="password" required>
+                  </div>
+                  <div class="field">
+                     <input type="password" placeholder="Confirm password" name="c_password" required>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
-                     <input type="submit" value="Signup">
+                     <input type="submit" value="Signup" onclick="findError()">
                   </div>
+                  <html lang="en">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="484500096380-a9mkb3gt7uechn7v865n670qi12f88as.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      }
+    </script>
+  </body>
+</html>
                </form>
             </div>
          </div>
@@ -80,6 +134,22 @@
            signupBtn.click();
            return false;
          });
+
+         function findError()
+         {
+            var error=document.getElementById("error")
+            if(password!=c_password)
+            {
+               error.innerHTML( "<span style='color: red;'>"+
+                        "Password doesn't matched")
+            }
+            else
+            {
+               error.innerHTML( "<span style='color: green;'>"+
+                        "Registered successfully")
+            }
+         }
+         
       </script>
    </body>
 </html>
