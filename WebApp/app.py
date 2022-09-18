@@ -66,7 +66,6 @@ print(f"{bcolors.HEADER}Connection to MongoDB Server succeeded.{bcolors.ENDC}")
 print(f"{bcolors.HEADER}Database connections initialized successfully.{bcolors.ENDC}")  
 mydb=myClient["Aviato"]
 mycol=mydb["register"]
-
 app = Flask(__name__)
 @app.route('/')
 def student():
